@@ -16,7 +16,7 @@ class BoardDecimal:
 	def getFirstLeftColumn(self):
 		return self.firstLeftColumn
 		
-	def printDefaultField(self):
+	def printEmptyField(self):
 		for i in range(0,9):
 			print('|', 9* 'x|')
 
@@ -56,19 +56,41 @@ class BoardDecimal:
 	
 	@staticmethod
 	def CColumnLast(self):
+		can_return = False
 		if len(self.firstLeftColumn) == 2:
-			for j in range(1,2):
+			for j in range(1,3):
 				if self.firstLeftColumn[1] == self.firstUpperRow[j]:
 					self.firstLeftColumn.pop()
-					return 0
-		if len(self.firstLeftColumn) == 3:
-			for j in range(1,2):
-				if self.firstLeftColumn[2] == self.firstUpperRow[j]:
-					self.firstLeftColumn.pop()
-					return 0
-		if len(self.firstLeftColumn)>1:
-			for i in range(0, len(self.firstLeftColumn)-1):
-				if self.firstLeftColumn[i] == self.firstLeftColumn[len(self.firstLeftColumn)-1]:
-					self.firstLeftColumn.pop()
-					return 0
-		return 1
+					can_return = True
+					break
+		if (can_return != True):
+			if len(self.firstLeftColumn) == 3:
+				for j in range(1,3):
+					if self.firstLeftColumn[2] == self.firstUpperRow[j]:
+						self.firstLeftColumn.pop()
+						can_return = True
+						break
+			if (can_return != True):
+				if len(self.firstLeftColumn)>1:
+					for i in range(0, len(self.firstLeftColumn)-1):
+						if self.firstLeftColumn[i] == self.firstLeftColumn[len(self.firstLeftColumn)-1]:
+							self.firstLeftColumn.pop()
+							can_return = True
+							break
+					if (can_return != True):
+						return 1
+					else:
+						return 0
+			else:
+				return 0
+		else:
+			return 0
+	
+	def printField(self):
+		for i in range(0,8):
+			if i == 0:
+				for j in range(0,8):
+					print(str(self.firstUpperRow[j]) + ' | ', end = "")
+				print()
+			if i > 0:
+				print(str(self.firstLeftColumn[i]) + ' | x |' + 6 * ' x |')
