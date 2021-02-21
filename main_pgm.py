@@ -4,7 +4,8 @@ def Main():
 	tabla = BoardDecimal()
 	#print(tabla.getFirstUpperRow())	
 	#print(tabla.getFirstLeftColumn())
-	tabla.printField()
+	#tabla.printField()
+	print(tabla.printGameFieldRows())
 
 if __name__ == '__main__':
 	Main()
